@@ -24,21 +24,23 @@ public class OozieRun {
     // 是否使用系统类库
     private static String system_libpath = "ture";
     // 用户自定义类库位置
-    private static String user_libpath = NAMENode+"/user/tescomm/oozie/ad/libserver";
+    private static String user_libpath = NAMENode + "/user/tescomm/oozie/ad/libserver";
 
 
     OozieClient wc = null;
+
     public OozieRun(String url) {
         wc = new OozieClient(url);
     }
 
     /**
      * 启动oozie， 并返回job id
+     *
      * @return
      * @throws OozieClientException
      */
     public String startJob() throws OozieClientException {
-       // 配置config文件， 向oozie传递参数
+        // 配置config文件， 向oozie传递参数
         Properties conf = wc.createConfiguration();
         conf.setProperty(OozieClient.APP_PATH, JOB_PATH);
         conf.setProperty("jobTracker", JOB_Tracker);
@@ -50,6 +52,7 @@ public class OozieRun {
 
     /**
      * 根据oozie id得到job状态
+     *
      * @param jobID
      * @return
      * @throws OozieClientException

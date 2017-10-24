@@ -13,30 +13,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <curator-version>3.2.1</curator-version>
+        <curator-version>2.9.0</curator-version>
 
         <log4j-version>1.2.15</log4j-version>
         <org.slf4j-version>1.6.1</org.slf4j-version>
     </properties>
     <dependencies>
-
-        <!-- start log -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${org.slf4j-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${org.slf4j-version}</version>
-        </dependency>
-        <!-- end log -->
 
         <dependency>
             <groupId>org.apache.curator</groupId>
@@ -48,10 +30,84 @@
             <artifactId>curator-recipes</artifactId>
             <version>${curator-version}</version>
         </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
-        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.8</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>log4j</groupId>
+                                    <artifactId>log4j</artifactId>
+                                    <version>${log4j-version}</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.slf4j</groupId>
+                                    <artifactId>slf4j-api</artifactId>
+                                    <version>${org.slf4j-version}</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.slf4j</groupId>
+                                    <artifactId>slf4j-log4j12</artifactId>
+                                    <version>${org.slf4j-version}</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.apache.zookeeper</groupId>
+                                    <artifactId>zookeeper</artifactId>
+                                    <version>3.4.5-cdh5.2.0</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.apache.curator</groupId>
+                                    <artifactId>curator-framework</artifactId>
+                                    <version>${curator-version}</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.apache.curator</groupId>
+                                    <artifactId>curator-recipes</artifactId>
+                                    <version>${curator-version}</version>
+
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>org.apache.curator</groupId>
+                                    <artifactId>curator-client</artifactId>
+                                    <version>${curator-version}</version>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>commons-lang</groupId>
+                                    <artifactId>commons-lang</artifactId>
+                                    <version>2.6</version>
+                                </artifactItem>
+
+                            </artifactItems>
+                            <outputDirectory>${project.build.directory}/classes/lib</outputDirectory>
+                            <!--<excludeTransitive>false</excludeTransitive>-->
+                            <stripVersion>true</stripVersion>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

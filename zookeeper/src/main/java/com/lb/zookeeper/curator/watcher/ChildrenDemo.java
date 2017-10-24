@@ -21,14 +21,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
 
-
 public class ChildrenDemo extends Observable {
 
+    //  java -cp zookeeper-1.0-SNAPSHOT.jar:log4j.jar:slf4j-api.jar:slf4j-log4j12.jar:curator-framework.jar:curator-recipes.jar:zookeeper.jar:curator-client-3.2.1.jar:commons-lang-2.6.jar:guava-18.0.jar   com.lb.zookeeper.curator.watcher.ChildrenDemo
+
     Logger log = Logger.getLogger(ChildrenDemo.class);
-    static String path = "/lb";
+    static String path = "/test";
 
     // 创建连接
-    ZkConnection zkc = new ZkConnection("lb", "10.95.3.136:2181,10.95.3.138:2181");
+    //  ZkConnection zkc = new ZkConnection("adsurvey", "Adsurvey-namenode1:2181,Adsurvey-namenode2:2181,datanode1:2181");
+    ZkConnection zkc = new ZkConnection("adsurvey", "datanode01:2181,datanode02:2181,datanode03:2181,datanode04:2181");
     CuratorFramework client = zkc.getZKConnection();
 
     // 创建线程池
@@ -71,7 +73,8 @@ public class ChildrenDemo extends Observable {
         client.start();
         final PathChildrenCache cache = new PathChildrenCache(client, path, true);
         try {
-            cache.start(StartMode.POST_INITIALIZED_EVENT);
+           // cache.start(StartMode.POST_INITIALIZED_EVENT);
+            cache.start();
         } catch (Exception e) {
             log.error("监控启动异常!!", e);
             e.printStackTrace();
@@ -80,18 +83,19 @@ public class ChildrenDemo extends Observable {
         cache.getListenable().addListener(new PathChildrenCacheListener() {
             @Override
             public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
+                log.info("---------------------" + event.toString() + "---" + Thread.currentThread().getName());
                 switch (event.getType()) {
                     case CHILD_ADDED:
-                        log.info("事件类型：" + event.getType() + ", 节点名称" + new String(event.getData().getData()) + ", 节点路径:" + event.getData().getPath() + ", 节点详细信息：" + event.getData().getStat().toString());
-                        System.out.println("新增");
+                        log.info("事件类型：" + event.getType() + ", 节点名称" + new String(event.getData().getData()) + ", 节点路径:" + event.getData().getPath() + ", 节点详细信息：" + event.getData().getStat().toString() + ", " + System.currentTimeMillis());
+                        //System.out.println("新增");
                         break;
                     case CHILD_UPDATED:
-                        log.info("事件类型：" + event.getType() + ", 节点名称" + new String(event.getData().getData()) + ", 节点路径:" + event.getData().getPath() + ", 节点详细信息：" + event.getData().getStat().toString());
-                        System.out.println("修改");
+                        log.info("事件类型：" + event.getType() + ", 节点名称" + new String(event.getData().getData()) + ", 节点路径:" + event.getData().getPath() + ", 节点详细信息：" + event.getData().getStat().toString() + ", " + System.currentTimeMillis());
+                        //System.out.println("修改");
                         break;
                     case CHILD_REMOVED:
-                        log.info("事件类型：" + event.getType() + ", 节点名称" + new String(event.getData().getData()) + ", 节点路径:" + event.getData().getPath() + ", 节点详细信息：" + event.getData().getStat().toString());
-                        System.out.println("删除");
+                        log.info("事件类型：" + event.getType() + ", 节点名称" + new String(event.getData().getData()) + ", 节点路径:" + event.getData().getPath() + ", 节点详细信息：" + event.getData().getStat().toString() + ", " + System.currentTimeMillis());
+                        //System.out.println("删除");
                         break;
                     default:
                         break;

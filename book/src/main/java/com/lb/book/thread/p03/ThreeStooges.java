@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ *  使用Final域来确保对象的不可变性
+ *  P39
  * Created by liub on 2017/2/21.
  */
 public final class ThreeStooges {
@@ -18,13 +20,8 @@ public final class ThreeStooges {
     }
 
     public boolean isStooges(String name){
-        stooges.add("E");
+        //stooges.add("E");
         return stooges.contains(name);
     }
 
-    public static void main(String[] args){
-        ThreeStooges t = new ThreeStooges();
-        System.out.println(t.isStooges("A"));
-        System.out.println(t.isStooges("E"));
-    }
 }

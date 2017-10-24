@@ -14,32 +14,33 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  */
 public class TimeServer {
 
-    public void bind (int port) throws Exception{
+    public void bind(int port) throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
 
         EventLoopGroup workerGroup = new NioEventLoopGroup();
-try {
-    ServerBootstrap b = new ServerBootstrap();
-    b.group(bossGroup, workerGroup)
-            .channel(NioServerSocketChannel.class)
-            .option(ChannelOption.SO_BACKLOG, 1024)
-            .childHandler(new ChildChannelHandler());
+        try {
+            ServerBootstrap b = new ServerBootstrap();
+            b.group(bossGroup, workerGroup)
+                    .channel(NioServerSocketChannel.class)
+                    .option(ChannelOption.SO_BACKLOG, 1024)
+                    .childHandler(new ChildChannelHandler());
 
-    ChannelFuture f = b.bind(port).sync();
+            ChannelFuture f = b.bind(port).sync();
 
-    f.channel().closeFuture().sync();
-} finally { bossGroup.shutdownGracefully();
-    workerGroup.shutdownGracefully();
-}
+            f.channel().closeFuture().sync();
+        } finally {
+            bossGroup.shutdownGracefully();
+            workerGroup.shutdownGracefully();
+        }
     }
 
-    private class ChildChannelHandler extends ChannelInitializer<SocketChannel>{
-        protected  void initChannel(SocketChannel arg) throws Exception{
+    private class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
+        protected void initChannel(SocketChannel arg) throws Exception {
             arg.pipeline().addLast(new TimeServerHandler());
         }
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         new TimeServer().bind(8080);
     }
 }

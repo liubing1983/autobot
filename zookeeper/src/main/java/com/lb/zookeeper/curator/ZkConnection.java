@@ -20,31 +20,29 @@ public class ZkConnection {
     private String ip;
 
     // 超时时间
-    private  int sleep;
+    private int sleep;
     // 重试次数
     private int num;
 
     /**
-     *
-     * @param namespace  命名空间
-     * @param ip  zk server IP
+     * @param namespace 命名空间
+     * @param ip        zk server IP
      */
     public ZkConnection(String namespace, String ip) {
         this.namespace = namespace;
         this.ip = ip;
-        this.sleep = 3000;
-        this.num = 5;
+        this.sleep = 300;
+        this.num = 3;
     }
 
 
     /**
-     *
      * @param namespace
      * @param ip
      * @param sleep
      * @param num
      */
-    public ZkConnection(String namespace, String ip,  int sleep, int num) {
+    public ZkConnection(String namespace, String ip, int sleep, int num) {
         this.namespace = namespace;
         this.ip = ip;
         this.sleep = sleep;
@@ -53,6 +51,7 @@ public class ZkConnection {
 
     /**
      * 创建zookeeper连接
+     *
      * @return
      */
     public CuratorFramework getZKConnection() {
@@ -63,7 +62,7 @@ public class ZkConnection {
         if (StringUtils.isBlank(namespace)) {
             return CuratorFrameworkFactory.builder().connectString(ip).sessionTimeoutMs(5000).retryPolicy(rp).build();
         } else {
-            return CuratorFrameworkFactory.builder().connectString(ip).sessionTimeoutMs(5000).retryPolicy(rp).namespace(namespace).build();
+            return CuratorFrameworkFactory.builder().connectString(ip).sessionTimeoutMs(4000).retryPolicy(rp).namespace(namespace).build();
         }
     }
 
