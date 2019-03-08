@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <curator-version>2.9.0</curator-version>
 
-        <log4j-version>1.2.15</log4j-version>
+        <log4j-version>1.2.17</log4j-version>
         <org.slf4j-version>1.6.1</org.slf4j-version>
     </properties>
     <dependencies>
@@ -66,7 +66,7 @@
                                 <artifactItem>
                                     <groupId>org.apache.zookeeper</groupId>
                                     <artifactId>zookeeper</artifactId>
-                                    <version>3.4.5-cdh5.2.0</version>
+                                    <version>3.4.5-cdh5.6.0</version>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>org.apache.curator</groupId>

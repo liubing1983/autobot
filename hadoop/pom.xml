@@ -11,9 +11,24 @@
 
     <artifactId>hadoop</artifactId>
 
+    <repositories>
+        <repository>
+            <id>puhuifinance</id>
+            <name>Maven of Puhuifinance.com</name>
+            <url>http://inside.puhuifinance.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hadoop.version>2.6.0-cdh5.5.0</hadoop.version>
+        <hadoop.version>2.6.0-cdh5.9.3</hadoop.version>
     </properties>
 
     <dependencies>
