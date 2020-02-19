@@ -1,4 +1,4 @@
-package com.lb.netty.nio;
+package com.lb.netty.nettydemo.nio;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

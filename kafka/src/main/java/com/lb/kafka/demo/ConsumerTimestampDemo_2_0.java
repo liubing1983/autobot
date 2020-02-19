@@ -65,7 +65,7 @@ public class ConsumerTimestampDemo_2_0 {
                     int partition = entry.getKey().partition();
                     long timestamp = offsetTimestamp.timestamp();
                     long offset = offsetTimestamp.offset();
-                    System.out.println("partition = " + partition + ", time = " + df.format(new Date(timestamp))+ ", offset = " + offset);
+                   // System.out.println("partition = " + partition + ", time = " + df.format(new Date(timestamp))+ ", offset = " + offset);
                     // 设置读取消息的偏移量
                     consumer.seek(entry.getKey(), offset);
                 }

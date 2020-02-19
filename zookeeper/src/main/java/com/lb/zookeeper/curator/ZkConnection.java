@@ -67,7 +67,7 @@ public class ZkConnection {
     }
 
     public static void main(String[] args) {
-        ZkConnection zkc = new ZkConnection("lb", "10.95.3.136:2181,10.95.3.138:2181");
+        ZkConnection zkc = new ZkConnection("lb", "127.0.0.1:2181");
         CuratorFramework client = zkc.getZKConnection();
         client.start();
 
