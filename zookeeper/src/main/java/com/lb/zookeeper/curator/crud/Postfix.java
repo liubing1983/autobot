@@ -194,6 +194,7 @@ public class Postfix {
         // infixToSuffix("1 * 11 + 2 * 9 / ( 3 － 2 )".split(" "));
         // String s = "1 * 11 + 2 * 9 / ( 3 - 2 )";
         String s = "1 + 1 + 3 + 5 * 7 - 2 *  1 + 100 * 2 + (1 + 1)";
+
         if (args.length > 0) {
             s = args[0];
         }
